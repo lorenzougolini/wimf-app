@@ -4,14 +4,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/sigrdrifa/gotth-example/internal/server"
-	"github.com/sigrdrifa/gotth-example/internal/store"
+	"github.com/lorenzougolini/wimf-app/internal/server"
+	"github.com/lorenzougolini/wimf-app/internal/store"
 )
 
 func main() {
 	logger := log.New(os.Stdout, "[Spooktober] ", log.LstdFlags)
 
-	port := 9000
+	port := 3001
 
 	logger.Print("Creating guests store..")
 	guestDb := store.NewGuestStore(logger)

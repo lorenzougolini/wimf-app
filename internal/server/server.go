@@ -10,8 +10,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/sigrdrifa/gotth-example/internal/store"
-	"github.com/sigrdrifa/gotth-example/internal/templates"
+	"github.com/lorenzougolini/wimf-app/internal/store"
+	"github.com/lorenzougolini/wimf-app/internal/templates"
 )
 
 type GuestStore interface {
@@ -26,7 +26,7 @@ type server struct {
 	guestDb    GuestStore
 }
 
-// Creat a new server instance with the given logger and port
+// NewServer creates a new server instance with the given logger and port
 func NewServer(logger *log.Logger, port int, guestDb GuestStore) (*server, error) {
 	if logger == nil {
 		return nil, fmt.Errorf("logger is required")
@@ -37,7 +37,8 @@ func NewServer(logger *log.Logger, port int, guestDb GuestStore) (*server, error
 	return &server{
 		logger:  logger,
 		port:    port,
-		guestDb: guestDb}, nil
+		guestDb: guestDb,
+	}, nil
 }
 
 // Start the server
@@ -61,7 +62,8 @@ func (s *server) Start() error {
 	// define server
 	s.httpServer = &http.Server{
 		Addr:    fmt.Sprintf(":%d", s.port),
-		Handler: router}
+		Handler: router,
+	}
 
 	// create channel to listen for signals
 	stopChan = make(chan os.Signal, 1)
@@ -135,8 +137,8 @@ func (s *server) addGuestHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Write([]byte(fmt.Sprintf("this is the context: %s\n", r.Context())))
 	templates.Guests(guests, true).Render(r.Context(), w)
-
 }
 
 // GetGuestsHandler is a handler to get all guests from the guest store
@@ -149,9 +151,14 @@ func (s *server) getGuestsHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	for _, guest := range guests {
-		w.Write([]byte(fmt.Sprintf("Name: %s, Email: %s\n", guest.Name, guest.Email)))
+	guestsTemplate := templates.Guests(guests, true)
+	err = templates.Layout(guestsTemplate, "Guests", "/guests").Render(r.Context(), w)
+	if err != nil {
+		s.logger.Printf(("Error when rendering guests: %v"), err)
 	}
+	// for _, guest := range guests {
+	// 	w.Write([]byte(fmt.Sprintf("Name: %s, Email: %s\n", guest.Name, guest.Email)))
+	// }
 }
 
 func (s *server) getSignupHandler(w http.ResponseWriter, r *http.Request) {
