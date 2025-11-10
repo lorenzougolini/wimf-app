@@ -53,7 +53,7 @@ func (s *server) Start() error {
 	router.Handle("GET /static/", http.StripPrefix("/static/", fileServer))
 
 	router.HandleFunc("GET /", s.defaultHandler)
-	router.HandleFunc("GET /about", s.aboutHandler)
+	router.HandleFunc("GET /fridge", s.fridgeHandler)
 	router.HandleFunc("GET /health", s.healthCheckHandler)
 	router.HandleFunc("POST /guests", s.addGuestHandler)
 	router.HandleFunc("GET /guests", s.getGuestsHandler)
@@ -94,12 +94,12 @@ func (s *server) defaultHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (s *server) aboutHandler(w http.ResponseWriter, r *http.Request) {
+func (s *server) fridgeHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	aboutTemplate := templates.About()
-	err := templates.Layout(aboutTemplate, "About", "/about").Render(r.Context(), w)
+	fridgeTemplate := templates.Fridge()
+	err := templates.Layout(fridgeTemplate, "Fridge", "/fridge").Render(r.Context(), w)
 	if err != nil {
-		s.logger.Printf("Error when rendering about: %v", err)
+		s.logger.Printf("Error when rendering fridge: %v", err)
 	}
 }
 
