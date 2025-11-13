@@ -6,7 +6,8 @@ package store
 import (
 	"encoding/json"
 	"fmt"
-	"log"
+
+	"github.com/sirupsen/logrus"
 )
 
 type Guest struct {
@@ -15,11 +16,11 @@ type Guest struct {
 }
 
 type guestStore struct {
-	logger *log.Logger
+	logger *logrus.Logger
 	guests map[string]Guest
 }
 
-func NewGuestStore(logger *log.Logger) *guestStore {
+func NewGuestStore(logger *logrus.Logger) *guestStore {
 	return &guestStore{
 		logger: logger,
 		guests: make(map[string]Guest),
@@ -32,7 +33,7 @@ func (gs *guestStore) AddGuest(guest Guest) error {
 	}
 	// check if the key exists
 	if _, ok := gs.guests[guest.Email]; ok {
-		return fmt.Errorf("A spooky guest with email %s already exists", guest.Email)
+		return fmt.Errorf("a spooky guest with email %s already exists", guest.Email)
 	}
 	gs.guests[guest.Email] = guest
 	fmt.Printf("Added guest: %v \n", guest)

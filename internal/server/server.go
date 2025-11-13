@@ -12,6 +12,7 @@ import (
 
 	"github.com/lorenzougolini/wimf-app/internal/store"
 	"github.com/lorenzougolini/wimf-app/internal/templates"
+	"github.com/sirupsen/logrus"
 )
 
 type GuestStore interface {
@@ -20,14 +21,14 @@ type GuestStore interface {
 }
 
 type server struct {
-	logger     *log.Logger
+	logger     *logrus.Logger
 	port       int
 	httpServer *http.Server
 	guestDb    GuestStore
 }
 
 // NewServer creates a new server instance with the given logger and port
-func NewServer(logger *log.Logger, port int, guestDb GuestStore) (*server, error) {
+func NewServer(logger *logrus.Logger, port int, guestDb GuestStore) (*server, error) {
 	if logger == nil {
 		return nil, fmt.Errorf("logger is required")
 	}
