@@ -8,7 +8,7 @@ import (
 	"syscall"
 
 	"github.com/lorenzougolini/wimf-app/internal/server"
-	"github.com/lorenzougolini/wimf-app/internal/store"
+	"github.com/lorenzougolini/wimf-app/internal/database"
 	"github.com/sirupsen/logrus"
 )
 
@@ -44,18 +44,22 @@ func run() error {
 		logger.Debug("database stopping")
 		_ = dbconn.Close()
 	}()
-	db, err := store.New(dbconn)
+	db, err := database.New(dbconn)
 	if err != nil {
 		logger.Error("error creating AppDatabase")
 		return fmt.Errorf("creating AppDatabase: %w", err)
 	}
-	guestDb := store.NewGuestStore(logger)
-	guestDb.AddGuest(store.Guest{Name: "Sigrid", Email: "sig@fake-email.no"})
+	// guestDb := database.NewGuestStore(logger)
+	// guestDb.AddGuest(database.Guest{Name: "Sigrid", Email: "sig@fake-email.no"})
+
+	// Start API server
+	logger.Info("initializing API server")
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)
 	serverErrors := make(chan error, 1)
 
+	// Create API router
 	srv, err := server.NewServer(logger, port, guestDb)
 	if err != nil {
 		logger.Fatalf("Error when creating server: %s", err)
