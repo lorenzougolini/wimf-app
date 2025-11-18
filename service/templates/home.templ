@@ -20,28 +20,27 @@ templ Home() {
 				>
 					Capture Photo
 				</button>
+				// Inside Home(), add this temporary test button
+				<div class="p-4 text-center">
+					<button
+						hx-post="/fridge/items?itemid=TestChicken"
+						hx-swap="none"
+						class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+					>
+						Add "TestChicken" manually
+					</button>
+				</div>
 			</div>
 			<canvas id="photoCanvas" class="hidden"></canvas>
 		</div>
 		<div class="p-8 md:p-12 lg:px-16 lg:py-24">
-			<div class="mx-auto max-w-xl text-center" id="splash-right">
-				<h2 class="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white">
-					Ultimi prodotti aggiunti:
-				</h2>
-				<h2 class="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white">
-					Prodotti in scadenza:
-				</h2>
-				<!-- <div class="mt-4 md:mt-8"> -->
-				<!-- 	<button -->
-				<!-- 		hx-get="/signup" -->
-				<!-- 		hx-swap="innerHTML settle:1s" -->
-				<!-- 		hx-target="#splash-left" -->
-				<!-- 		class="inline-block rounded bg-orange-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-orange-700 focus:outline-none focus:ring focus:ring-yellow-400" -->
-				<!-- 	> -->
-				<!-- 		I am brave enough -->
-				<!-- 	</button> -->
-				<!-- </div> -->
-			</div>
+			<div
+				class="mx-auto max-w-xl text-center"
+				id="splash-right"
+				hx-get="/home-items"
+				hx-trigger="load, item-added from:body, every 2s"
+				hx-swap="innerHTML"
+			></div>
 		</div>
 	</section>
 	<script>

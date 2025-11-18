@@ -34,12 +34,16 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+
+	"github.com/lorenzougolini/wimf-app/service/models"
 )
 
 // AppDatabase is the high level interface for the DB
 type AppDatabase interface {
 	GetName() (string, error)
 	SetName(name string) error
+	AddItem(itemid string) error
+	GetLastItems(limit int) ([]models.Item, error)
 
 	Ping() error
 }
@@ -57,12 +61,14 @@ func New(db *sql.DB) (AppDatabase, error) {
 
 	// Check if table exists. If not, the database is empty, and we need to create the structure
 	var tableName string
-	err := db.QueryRow(`SELECT name FROM sqlite_master WHERE type='table' AND name='example_table';`).Scan(&tableName)
+	err := db.QueryRow(`SELECT name FROM sqlite_master WHERE type='table' AND name='items';`).Scan(&tableName)
 	if errors.Is(err, sql.ErrNoRows) {
-		sqlStmt := `CREATE TABLE example_table (id INTEGER NOT NULL PRIMARY KEY, name TEXT);`
+		sqlStmt := `CREATE TABLE IF NOT EXISTS items (
+			id TEXT NOT NULL PRIMARY KEY
+			);`
 		_, err = db.Exec(sqlStmt)
 		if err != nil {
-			return nil, fmt.Errorf("error creating database structure: %w", err)
+			return nil, fmt.Errorf("error creating database items structure: %w", err)
 		}
 	}
 
