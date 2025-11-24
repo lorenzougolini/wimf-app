@@ -40,10 +40,12 @@ import (
 
 // AppDatabase is the high level interface for the DB
 type AppDatabase interface {
-	GetName() (string, error)
-	SetName(name string) error
-	AddItem(itemid string) error
-	GetLastItems(limit int) ([]models.Item, error)
+	CheckIdExistence(barcode string) (bool, error)
+	AddItem(productInfo models.ProductInfo) error
+	GetItemByBarcode(barcode string) (bool, models.Item, error)
+
+	GetNItemsBy(limit int, orderBy string) ([]models.Item, error)
+	IncreaseItemQuantity(barcode string, quantity int) error
 
 	Ping() error
 }
@@ -63,9 +65,18 @@ func New(db *sql.DB) (AppDatabase, error) {
 	var tableName string
 	err := db.QueryRow(`SELECT name FROM sqlite_master WHERE type='table' AND name='items';`).Scan(&tableName)
 	if errors.Is(err, sql.ErrNoRows) {
-		sqlStmt := `CREATE TABLE IF NOT EXISTS items (
-			id TEXT NOT NULL PRIMARY KEY
+		sqlStmt := `
+			CREATE TABLE IF NOT EXISTS items (
+				id TEXT NOT NULL PRIMARY KEY,
+				barcode TEXT NOT NULL,
+				name TEXT NOT NULL,
+				brand TEXT NOT NULL,
+				quantity INTEGER NOT NULL DEFAULT 1,
+				expiration_date TEXT,
+				added_at TEXT DEFAULT CURRENT_TIMESTAMP
 			);`
+		// maybe add unit TEXT field
+
 		_, err = db.Exec(sqlStmt)
 		if err != nil {
 			return nil, fmt.Errorf("error creating database items structure: %w", err)

@@ -2,63 +2,147 @@ package templates
 
 templ Home() {
 	<section class="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2 sm:items-center dark:bg-gray-900">
-		<!-- 🆕 Camera capture area -->
+		<script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2/dist/quagga.min.js"></script>
 		<div class="flex flex-col items-center justify-center p-8">
-			<!-- Camera preview square -->
-			<div class="relative w-64 h-64 bg-gray-800 rounded-2xl overflow-hidden">
-				<video id="camera" autoplay playsinline class="w-full h-full object-cover"></video>
+			<div
+				id="interactive"
+				class="viewport relative w-full max-w-[300px] h-64 bg-black rounded-2xl overflow-hidden border-4 border-gray-800 shadow-xl"
+			>
+				<video class="w-full h-full object-cover"></video>
+				<div class="absolute top-1/2 left-0 w-full h-1 bg-red-500 opacity-50 pointer-events-none"></div>
 			</div>
-			<!-- Capture & upload button -->
-			<div class="mt-4 md:mt-8">
-				<button
-					id="captureBtn"
-					class="inline-block rounded bg-orange-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-orange-700 focus:outline-none focus:ring focus:ring-yellow-400"
-					hx-post="/upload-photo"
-					hx-vals="js:{photo: capturePhoto()}"
-					hx-target="this"
-					hx-swap="outerHTML"
-				>
-					Capture Photo
-				</button>
-				// Inside Home(), add this temporary test button
-				<div class="p-4 text-center">
-					<button
-						hx-post="/fridge/items?itemid=TestChicken"
-						hx-swap="none"
-						class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-					>
-						Add "TestChicken" manually
-					</button>
+			<div class="mt-4 w-full max-w-md">
+				<div id="scan-status" class="text-center text-lg font-bold text-gray-700 dark:text-gray-200 mb-2">
+					Scansiona un codice a barre!
 				</div>
+				<div id="debug-log" class="text-xs text-red-500 font-mono bg-gray-100 p-2 rounded hidden"></div>
 			</div>
-			<canvas id="photoCanvas" class="hidden"></canvas>
 		</div>
 		<div class="p-8 md:p-12 lg:px-16 lg:py-24">
 			<div
 				class="mx-auto max-w-xl text-center"
 				id="splash-right"
-				hx-get="/home-items"
-				hx-trigger="load, item-added from:body, every 2s"
+				hx-get="/fridge/home-items"
+				hx-trigger="load, item-added from:body, every 10s"
 				hx-swap="innerHTML"
 			></div>
 		</div>
 	</section>
 	<script>
-  const video = document.getElementById('camera');
-  const canvas = document.getElementById('photoCanvas');
+  // --- 1. EAN-13 Checksum Validator ---
+  // 1D scanners sometimes "hallucinate" numbers. This math ensures the code is real.
+  function validateEan13(code) {
+    if (!code || code.length !== 13) return false;
 
-  // Start camera
-  navigator.mediaDevices.getUserMedia({video: true})
-    .then(stream => {video.srcObject = stream;})
-    .catch(err => {console.error('Camera access denied:', err);});
-
-  // Capture a still frame as Base64
-  function capturePhoto() {
-    const ctx = canvas.getContext('2d');
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL('image/png');
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+      const digit = parseInt(code[i]);
+      sum += (i % 2 === 0) ? digit : digit * 3;
+    }
+    const checkDigit = (10 - (sum % 10)) % 10;
+    return checkDigit === parseInt(code[12]);
   }
+
+  // --- 2. Scanner Logic ---
+  let lastScanned = null;
+  let confidenceCounter = null;
+  const CONFIDENCE_THRESHOLD = 5;
+  let isPaused = false;
+
+  function startScanner() {
+    Quagga.init({
+      inputStream: {
+        name: "Live",
+        type: "LiveStream",
+        target: document.querySelector('#interactive'),
+        constraints: {
+          facingMode: "environment",
+          // Higher resolution is CRITICAL for EAN-13
+          width: {min: 440, ideal: 1280, max: 1920},
+          height: {min: 480, ideal: 720, max: 1080},
+          aspectRatio: {min: 1, max: 2}
+        },
+      },
+      locator: {
+        patchSize: "medium",
+        halfSample: true,
+      },
+      numOfWorkers: 2,
+      frequency: 10,
+      decoder: {
+        // Only look for EAN (Europe/International standard)
+        readers: ["ean_reader"]
+      },
+      locate: true
+    }, function (err) {
+      if (err) {
+        document.getElementById('scan-status').innerText = "Error: " + err;
+        return;
+      }
+      Quagga.start();
+    });
+
+    // Detection Event
+    Quagga.onDetected(function (result) {
+      if (isPaused) return;
+      const code = result.codeResult.code;
+      const status = document.getElementById('scan-status');
+
+      // A. Check if it is a valid EAN-13
+      if (!validateEan13(code)) return;
+
+      // B. Debounce (Don't scan the same thing twice in 3 seconds)
+      if (lastScanned === code) {
+        status.innerText = `Scansionando...`;
+        confidenceCounter++;
+      } else {
+        lastScanned = code;
+        confidenceCounter = 1;
+      }
+      // lastScanned = code;
+      // setTimeout(() => {lastScanned = null;}, 3000);
+      // if (confidenceCounter > 2) {
+      //   status.classList.remove('text-green-600');
+      //   status.classList.add('text-yellow-600');
+      // }
+
+      if (confidenceCounter >= CONFIDENCE_THRESHOLD) {
+        isPaused = true;
+
+        status.innerText = `Trovato: ${code}`;
+        status.classList.remove('text-yellow-600');
+        status.classList.add('text-green-600');
+
+        // D. Send to Go Backend
+        htmx.ajax('POST', `/fridge/items`, {
+          target: '#splash-right',
+          swap: 'none',
+          values: {
+            barcode: code
+          }
+        });
+
+        setTimeout(() => {
+          isPaused = false;
+          lastScanned = null;
+          confidenceCounter = 0;
+
+          status.innerText = "Scansiona un codice a barre!"
+        }, 3000)
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', startScanner);
 </script>
+	<style>
+  /* Quagga adds a canvas overlay for drawing boxes, ensure it fits */
+  #interactive canvas.drawingBuffer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
 }

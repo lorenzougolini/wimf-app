@@ -42,16 +42,15 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/lorenzougolini/wimf-app/service/database"
+	"github.com/lorenzougolini/wimf-app/service/foodapi"
 	"github.com/sirupsen/logrus"
 )
 
 // Config is used to provide dependencies and configuration to the New function.
 type Config struct {
-	// Logger where log entries are sent
-	Logger logrus.FieldLogger
-
-	// Database is the instance of database.AppDatabase where data are saved
+	Logger   logrus.FieldLogger
 	Database database.AppDatabase
+	FoodApi  foodapi.Client
 }
 
 // Router is the package API interface representing an API handler builder
@@ -84,6 +83,7 @@ func New(cfg Config) (Router, error) {
 		router:     router,
 		baseLogger: cfg.Logger,
 		db:         cfg.Database,
+		foodApi:    cfg.FoodApi,
 	}, nil
 }
 
@@ -95,4 +95,6 @@ type _router struct {
 	baseLogger logrus.FieldLogger
 
 	db database.AppDatabase
+
+	foodApi foodapi.Client
 }

@@ -71,7 +71,7 @@ func footer() templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<footer class=\"bg-white dark:bg-gray-900\"><div class=\"mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24\"><div class=\"grid grid-cols-1 gap-8 lg:grid-cols-3\"><div><div class=\"flex justify-center text-orange-600 sm:justify-start dark:text-orange-300\"><!-- logo --><img src=\"/static/img/GOTTH.svg\" style=\"height: 4rem;\"></div><p class=\"mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left dark:text-gray-400\">This is an example web application made for an educational video on the Go + Templ + TailwindCSS + HTMX stack.</p><ul class=\"mt-8 flex justify-center gap-6 sm:justify-start md:gap-8\"><li><a href=\"https://github.com/sigrdrifa/gotth-example\" rel=\"noreferrer\" target=\"_blank\" class=\"text-orange-700 transition hover:text-orange-700/75 dark:text-orange-500 dark:hover:text-orange-500/75\"><span class=\"sr-only\">GitHub</span> <svg class=\"size-6\" fill=\"currentColor\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z\" clip-rule=\"evenodd\"></path></svg></a></li></ul></div><div class=\"grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2\"><div class=\"text-center sm:text-left\"></div><div class=\"text-center sm:text-left\"></div><div class=\"text-center sm:text-left\"><p class=\"text-lg font-medium text-gray-900 dark:text-white\">Helpful Links</p><ul class=\"mt-8 space-y-4 text-sm\"><li><a class=\"text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75\" href=\"https://htmx.org\" target=\"_blank\">htmx.org</a></li><li><a class=\"text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75\" href=\"#\">Go Air</a></li><li><a class=\"gap-1.5\" href=\"https://templ.guide/\" target=\"_blank\"><span class=\"text-gray-700 transition group-hover:text-gray-700/75 dark:text-white dark:hover:text-white/75\">Go Templ</span> <span class=\"relative flex size-2\"><span class=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75\"></span> <span class=\"relative inline-flex size-2 rounded-full bg-orange-500\"></span></span></a></li></ul></div><div class=\"text-center sm:text-left\"><p class=\"text-lg font-medium text-gray-900 dark:text-white\">Contact Us</p><ul class=\"mt-8 space-y-4 text-sm\"><li><a class=\"flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"size-5 shrink-0 text-gray-900 dark:text-white\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z\"></path></svg> <span class=\"flex-1 text-gray-700 dark:text-gray-300\">sig@fake-email.com </span></a></li><li><a class=\"flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"size-5 shrink-0 text-gray-900 dark:text-white\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z\"></path></svg> <span class=\"flex-1 text-gray-700 dark:text-gray-300\">666-666-666</span></a></li><li class=\"flex items-start justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"size-5 shrink-0 text-gray-900 dark:text-white\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z\"></path> <path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 11a3 3 0 11-6 0 3 3 0 016 0z\"></path></svg><address class=\"-mt-0.5 flex-1 not-italic text-gray-700 dark:text-gray-300\">84 Elm Street, Horrorville, CA, USA</address></li></ul></div></div></div><div class=\"mt-12 border-t border-gray-100 pt-6 dark:border-gray-800\"><div class=\"text-center sm:flex sm:justify-between sm:text-left\"><p class=\"text-sm text-gray-500 dark:text-gray-400\"><span class=\"block sm:inline\">All rights reserved.</span> <a class=\"inline-block text-orange-600 underline transition hover:text-orange-600/75 dark:text-orange-500 dark:hover:text-orange-500/75\" href=\"#\">Terms & Conditions</a> <span>&middot;</span> <a class=\"inline-block text-orange-600 underline transition hover:text-orange-600/75 dark:text-orange-500 dark:hover:text-orange-500/75\" href=\"#\">Privacy Policy</a></p><p class=\"mt-4 text-sm text-gray-500 sm:order-first sm:mt-0 dark:text-gray-400\">&copy; 2024 @sigfaults on Youtube</p></div></div></div></footer>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<footer class=\"bg-white dark:bg-gray-900\"><div class=\"mx-auto max-w-screen-xl px-4 pb-6 pt-16 sm:px-6 lg:px-8 lg:pt-24\"><div class=\"grid grid-cols-1 gap-8 lg:grid-cols-3\"><div><div class=\"flex justify-center text-orange-600 sm:justify-start dark:text-orange-300\"><!-- logo --><img src=\"/static/img/fridge.svg\" style=\"height: 4rem;\"></div><p class=\"mt-6 max-w-md text-center leading-relaxed text-gray-500 sm:max-w-xs sm:text-left dark:text-gray-400\">In questa piccola webapp puoi registrare quello che c'è nel tuo frigo semplicemente scansionando il codice a barre. Così non ti troverai a comprare cibi duplicati!</p></div><div class=\"grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 lg:col-span-2\"><div class=\"text-center sm:text-left\"></div><div class=\"text-center sm:text-left\"></div><div class=\"text-center sm:text-left\"><!-- \t<p class=\"text-lg font-medium text-gray-900 dark:text-white\">Helpful Links</p> --><!-- \t<ul class=\"mt-8 space-y-4 text-sm\"> --><!-- \t\t<li> --><!-- \t\t\t<a --><!-- \t\t\t\tclass=\"text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75\" --><!-- \t\t\t\thref=\"https://htmx.org\" --><!-- \t\t\t\ttarget=\"_blank\" --><!-- \t\t\t> --><!-- \t\t\t\thtmx.org --><!-- \t\t\t</a> --><!-- \t\t</li> --><!-- \t\t<li> --><!-- \t\t\t<a --><!-- \t\t\t\tclass=\"text-gray-700 transition hover:text-gray-700/75 dark:text-white dark:hover:text-white/75\" --><!-- \t\t\t\thref=\"#\" --><!-- \t\t\t> --><!-- \t\t\t\tGo Air --><!-- \t\t\t</a> --><!-- \t\t</li> --><!-- \t\t<li> --><!-- \t\t\t<a class=\"gap-1.5\" href=\"https://templ.guide/\" target=\"_blank\"> --><!-- \t\t\t\t<span --><!-- \t\t\t\t\tclass=\"text-gray-700 transition group-hover:text-gray-700/75 dark:text-white dark:hover:text-white/75\" --><!-- \t\t\t\t> --><!-- \t\t\t\t\tGo Templ --><!-- \t\t\t\t</span> --><!-- \t\t\t\t<span class=\"relative flex size-2\"> --><!-- \t\t\t\t\t<span --><!-- \t\t\t\t\t\tclass=\"absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75\" --><!-- \t\t\t\t\t></span> --><!-- \t\t\t\t\t<span class=\"relative inline-flex size-2 rounded-full bg-orange-500\"></span> --><!-- \t\t\t\t</span> --><!-- \t\t\t</a> --><!-- \t\t</li> --><!-- \t</ul> --></div><div class=\"text-center sm:text-left\"><p class=\"text-lg font-medium text-gray-900 dark:text-white\">Contatti</p><ul class=\"mt-8 space-y-4 text-sm\"><li><a class=\"flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"size-5 shrink-0 text-gray-900 dark:text-white\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z\"></path></svg> <span class=\"flex-1 text-gray-700 dark:text-gray-300\">lore@fake-email.com </span></a></li></ul></div></div></div><div class=\"mt-12 border-t border-gray-100 pt-6 dark:border-gray-800\"><!-- <div class=\"text-center sm:flex sm:justify-between sm:text-left\"> --><!-- \t<p class=\"text-sm text-gray-500 dark:text-gray-400\"> --><!-- \t\t<span class=\"block sm:inline\">All rights reserved.</span> --><!-- \t\t<a --><!-- \t\t\tclass=\"inline-block text-orange-600 underline transition hover:text-orange-600/75 dark:text-orange-500 dark:hover:text-orange-500/75\" --><!-- \t\t\thref=\"#\" --><!-- \t\t> --><!-- \t\t\tTerms & Conditions --><!-- \t\t</a> --><!-- \t\t<span>&middot;</span> --><!-- \t\t<a --><!-- \t\t\tclass=\"inline-block text-orange-600 underline transition hover:text-orange-600/75 dark:text-orange-500 dark:hover:text-orange-500/75\" --><!-- \t\t\thref=\"#\" --><!-- \t\t> --><!-- \t\t\tPrivacy Policy --><!-- \t\t</a> --><!-- \t</p> --><!-- \t<p class=\"mt-4 text-sm text-gray-500 sm:order-first sm:mt-0 dark:text-gray-400\"> --><!-- \t\t&copy; 2024 @sigfaults on Youtube --><!-- \t</p> --><!-- </div> --></div></div></footer>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -100,52 +100,332 @@ func nav(activeLink string) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<header class=\"bg-white dark:bg-gray-900 shadow\"><div class=\"mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8\"><a class=\"block text-orange-600 dark:text-orange-300\" href=\"#\"><span class=\"sr-only\">Home</span> <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" id=\"pumpkin\"><path d=\"M17.286 1027.93v-1.866c0-1.069.86-1.93 1.928-1.93h-1.928a2.567 2.567 0 0 0-2.572 2.573v1.223M14.071 1027.994h3.858c.712 0 1.285.573 1.285 1.286v1.286h-6.428v-1.286c0-.713.573-1.286 1.285-1.286z\" transform=\"translate(0 -1020.362)\" fill=\"#3c3b41\" fill-opacity=\"1\" stroke=\"none\" stroke-width=\".777574\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M15.357 1030.566h4.5a9.624 9.624 0 0 1 9.643 9.648c0 5.345-4.3 9.648-9.643 9.648h-4.5 1.286-4.5a9.624 9.624 0 0 1-9.643-9.648c0-5.345 4.3-9.648 9.643-9.648h4.5z\" transform=\"translate(0 -1020.362)\" fill=\"#ff9a00\" fill-opacity=\"1\" stroke=\"none\" stroke-width=\".777574\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M16 1030.066c-5.596 0-10.143 4.55-10.143 10.149 0 5.598 4.547 10.146 10.143 10.146 5.596 0 10.143-4.548 10.143-10.146 0-5.599-4.547-10.149-10.143-10.149zm0 1a9.138 9.138 0 0 1 9.143 9.149A9.136 9.136 0 0 1 16 1049.36a9.136 9.136 0 0 1-9.143-9.146 9.138 9.138 0 0 1 9.143-9.149z\" style=\"line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1\" transform=\"translate(0 -1020.362)\" color=\"#000\" font-style=\"normal\" font-variant=\"normal\" font-weight=\"400\" font-stretch=\"normal\" font-size=\"medium\" font-family=\"sans-serif\" text-decoration=\"none\" letter-spacing=\"normal\" word-spacing=\"normal\" direction=\"ltr\" writing-mode=\"lr-tb\" baseline-shift=\"baseline\" text-anchor=\"start\" clip-rule=\"nonzero\" display=\"inline\" overflow=\"visible\" visibility=\"visible\" opacity=\"1\" color-interpolation=\"sRGB\" color-interpolation-filters=\"linearRGB\" fill=\"#000\" fill-opacity=\"1\" fill-rule=\"nonzero\" stroke=\"none\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\" stroke-dasharray=\"none\" stroke-dashoffset=\"0\" stroke-opacity=\"1\" color-rendering=\"auto\" image-rendering=\"auto\" shape-rendering=\"auto\" text-rendering=\"auto\" enable-background=\"accumulate\"></path> <path d=\"M12.143 1030.066A10.134 10.134 0 0 0 2 1040.215a10.133 10.133 0 0 0 10.143 10.146h4.5a.5.5 0 1 0 0-1h-4.5A9.113 9.113 0 0 1 3 1040.215a9.115 9.115 0 0 1 9.143-9.149h4.5a.5.5 0 1 0 0-1h-4.5z\" style=\"line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1\" transform=\"translate(0 -1020.362)\" color=\"#000\" font-style=\"normal\" font-variant=\"normal\" font-weight=\"400\" font-stretch=\"normal\" font-size=\"medium\" font-family=\"sans-serif\" text-decoration=\"none\" letter-spacing=\"normal\" word-spacing=\"normal\" direction=\"ltr\" writing-mode=\"lr-tb\" baseline-shift=\"baseline\" text-anchor=\"start\" clip-rule=\"nonzero\" display=\"inline\" overflow=\"visible\" visibility=\"visible\" opacity=\"1\" color-interpolation=\"sRGB\" color-interpolation-filters=\"linearRGB\" fill=\"#000\" fill-opacity=\"1\" fill-rule=\"nonzero\" stroke=\"none\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\" stroke-dasharray=\"none\" stroke-dashoffset=\"0\" stroke-opacity=\"1\" color-rendering=\"auto\" image-rendering=\"auto\" shape-rendering=\"auto\" text-rendering=\"auto\" enable-background=\"accumulate\"></path> <path d=\"m12.143 1035.712 1.928 3.859h-3.857z\" transform=\"translate(0 -1020.362)\" fill=\"#ff4e18\" fill-opacity=\"1\" stroke=\"none\" stroke-width=\".77757394\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M15.357 1030.066a.5.5 0 1 0 0 1h4.5a9.115 9.115 0 0 1 9.143 9.149 9.113 9.113 0 0 1-9.143 9.146h-4.5a.5.5 0 1 0 0 1h4.5c5.611 0 10.143-4.533 10.143-10.146a10.134 10.134 0 0 0-10.143-10.149h-4.5z\" style=\"line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1\" transform=\"translate(0 -1020.362)\" color=\"#000\" font-style=\"normal\" font-variant=\"normal\" font-weight=\"400\" font-stretch=\"normal\" font-size=\"medium\" font-family=\"sans-serif\" text-decoration=\"none\" letter-spacing=\"normal\" word-spacing=\"normal\" direction=\"ltr\" writing-mode=\"lr-tb\" baseline-shift=\"baseline\" text-anchor=\"start\" clip-rule=\"nonzero\" display=\"inline\" overflow=\"visible\" visibility=\"visible\" opacity=\"1\" color-interpolation=\"sRGB\" color-interpolation-filters=\"linearRGB\" fill=\"#000\" fill-opacity=\"1\" fill-rule=\"nonzero\" stroke=\"none\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\" stroke-dasharray=\"none\" stroke-dashoffset=\"0\" stroke-opacity=\"1\" color-rendering=\"auto\" image-rendering=\"auto\" shape-rendering=\"auto\" text-rendering=\"auto\" enable-background=\"accumulate\"></path> <path d=\"M14.072 1027.494c-.98 0-1.787.804-1.787 1.785v1.287a.5.5 0 0 0 .5.5h6.43a.5.5 0 0 0 .5-.5v-1.287c0-.98-.806-1.785-1.787-1.785h-3.856zm0 1h3.856c.444 0 .787.34.787.785v.787h-5.43v-.787c0-.444.343-.785.787-.785z\" style=\"line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1\" transform=\"translate(0 -1020.362)\" color=\"#000\" font-style=\"normal\" font-variant=\"normal\" font-weight=\"400\" font-stretch=\"normal\" font-size=\"medium\" font-family=\"sans-serif\" text-decoration=\"none\" letter-spacing=\"normal\" word-spacing=\"normal\" direction=\"ltr\" writing-mode=\"lr-tb\" baseline-shift=\"baseline\" text-anchor=\"start\" clip-rule=\"nonzero\" display=\"inline\" overflow=\"visible\" visibility=\"visible\" opacity=\"1\" color-interpolation=\"sRGB\" color-interpolation-filters=\"linearRGB\" fill=\"#000\" fill-opacity=\"1\" fill-rule=\"nonzero\" stroke=\"none\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\" stroke-dasharray=\"none\" stroke-dashoffset=\"0\" stroke-opacity=\"1\" color-rendering=\"auto\" image-rendering=\"auto\" shape-rendering=\"auto\" text-rendering=\"auto\" enable-background=\"accumulate\"></path> <path d=\"M17.285 1023.635a3.075 3.075 0 0 0-3.07 3.072v1.158a.5.5 0 1 0 1 0v-1.158c0-1.157.914-2.072 2.07-2.072h.094c-.318.41-.594.873-.594 1.43v1.93a.5.5 0 1 0 1 0v-1.93c0-.801.63-1.43 1.43-1.43a.5.5 0 0 0 0-1h-1.93z\" style=\"line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1\" transform=\"translate(0 -1020.362)\" color=\"#000\" font-style=\"normal\" font-variant=\"normal\" font-weight=\"400\" font-stretch=\"normal\" font-size=\"medium\" font-family=\"sans-serif\" text-decoration=\"none\" letter-spacing=\"normal\" word-spacing=\"normal\" direction=\"ltr\" writing-mode=\"lr-tb\" baseline-shift=\"baseline\" text-anchor=\"start\" clip-rule=\"nonzero\" display=\"inline\" overflow=\"visible\" visibility=\"visible\" opacity=\"1\" color-interpolation=\"sRGB\" color-interpolation-filters=\"linearRGB\" fill=\"#000\" fill-opacity=\"1\" fill-rule=\"nonzero\" stroke=\"none\" stroke-width=\"1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\" stroke-dasharray=\"none\" stroke-dashoffset=\"0\" stroke-opacity=\"1\" color-rendering=\"auto\" image-rendering=\"auto\" shape-rendering=\"auto\" text-rendering=\"auto\" enable-background=\"accumulate\"></path> <path d=\"m19.857 1035.712 1.929 3.859h-3.857z\" transform=\"translate(0 -1020.362)\" fill=\"#ff4e18\" fill-opacity=\"1\" stroke=\"none\" stroke-width=\".77757394\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M12.146 1035.21a.5.5 0 0 0-.45.278l-1.928 3.86a.5.5 0 0 0 .447.722h3.857a.5.5 0 0 0 .448-.722l-1.93-3.86a.5.5 0 0 0-.444-.277zm-.003 1.62 1.119 2.24h-2.239l1.12-2.24zM19.861 1035.21a.5.5 0 0 0-.45.278l-1.93 3.86a.5.5 0 0 0 .447.722h3.857a.5.5 0 0 0 .447-.722l-1.927-3.86a.5.5 0 0 0-.444-.277zm-.004 1.62 1.12 2.24h-2.239l1.12-2.24z\" style=\"line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1\" transform=\"translate(0 -1020.362)\" color=\"#000\" font-style=\"normal\" font-variant=\"normal\" font-weight=\"400\" font-stretch=\"normal\" font-size=\"medium\" font-family=\"sans-serif\" text-decoration=\"none\" letter-spacing=\"normal\" word-spacing=\"normal\" direction=\"ltr\" writing-mode=\"lr-tb\" baseline-shift=\"baseline\" text-anchor=\"start\" clip-rule=\"nonzero\" display=\"inline\" overflow=\"visible\" visibility=\"visible\" opacity=\"1\" color-interpolation=\"sRGB\" color-interpolation-filters=\"linearRGB\" fill=\"#000\" fill-opacity=\"1\" fill-rule=\"nonzero\" stroke=\"none\" stroke-width=\".99999988\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\" stroke-dasharray=\"none\" stroke-dashoffset=\"0\" stroke-opacity=\"1\" color-rendering=\"auto\" image-rendering=\"auto\" shape-rendering=\"auto\" text-rendering=\"auto\" enable-background=\"accumulate\"></path> <path d=\"M11.057 1042.932a.5.5 0 0 0-.29.898l1.641 1.281a.5.5 0 0 0 .615 0l1.334-1.04 1.334 1.04a.5.5 0 0 0 .618 0l1.334-1.04 1.334 1.04a.5.5 0 0 0 .615 0l1.64-1.28a.5.5 0 1 0-.615-.79l-1.334 1.043-1.334-1.043a.5.5 0 0 0-.615 0L16 1044.084l-1.334-1.043a.5.5 0 0 0-.615 0l-1.334 1.043-1.334-1.043a.5.5 0 0 0-.326-.11z\" style=\"line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;white-space:normal;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1\" transform=\"translate(0 -1020.362)\" color=\"#000\" font-style=\"normal\" font-variant=\"normal\" font-weight=\"400\" font-stretch=\"normal\" font-size=\"medium\" font-family=\"sans-serif\" text-decoration=\"none\" letter-spacing=\"normal\" word-spacing=\"normal\" direction=\"ltr\" writing-mode=\"lr-tb\" baseline-shift=\"baseline\" text-anchor=\"start\" clip-rule=\"nonzero\" display=\"inline\" overflow=\"visible\" visibility=\"visible\" opacity=\"1\" color-interpolation=\"sRGB\" color-interpolation-filters=\"linearRGB\" fill=\"#000\" fill-opacity=\"1\" fill-rule=\"evenodd\" stroke=\"none\" stroke-width=\".99999988px\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-miterlimit=\"4\" stroke-dasharray=\"none\" stroke-dashoffset=\"0\" stroke-opacity=\"1\" color-rendering=\"auto\" image-rendering=\"auto\" shape-rendering=\"auto\" text-rendering=\"auto\" enable-background=\"accumulate\"></path></svg></a><div class=\"flex flex-1 items-center justify-end md:justify-between\"><nav aria-label=\"Global\" class=\"hidden md:block\"><ul class=\"flex items-center gap-6 text-sm\"><li>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<header class=\"bg-white dark:bg-gray-900 shadow\"><div class=\"mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8\"><div class=\"flex items-center gap-4\"><a class=\"block\" href=\"/\"><span class=\"sr-only\">Home</span> <img src=\"/static/img/fridge.svg\" alt=\"Logo\" style=\"height: 32px; width: auto;\"></a></div><div class=\"flex flex-1 items-center justify-end md:justify-between\"><nav aria-label=\"Global\" class=\"hidden md:block\"><ul class=\"flex items-center gap-6 text-sm\"><li>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if activeLink == "/" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-orange-600 transition\" href=\"/\">Home</a>")
+		templ_7745c5c3_Err = desktopLink("/", "Home", activeLink).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</li><li>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = desktopLink("/fridge", "Frigo", activeLink).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</li><li>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = desktopLink("/guests", "Guests", activeLink).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</li></ul></nav></div></div></header><div class=\"fixed bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-900 dark:border-gray-600 md:hidden\"><div class=\"grid h-full max-w-lg grid-cols-3 mx-auto font-medium\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = bottomLink("/", "Home", activeLink, homeIcon()).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = bottomLink("/fridge", "Frigo", activeLink, fridgeIcon()).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = bottomLink("/guests", "Guests", activeLink, guestsIcon()).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "</div></div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+// --- Helper Components to keep code clean ---
+
+// 1. Desktop Link Helper
+func desktopLink(path, label, active string) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		if active == path {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-orange-600 transition\" href=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var6 templ.SafeURL
+			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(path))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 162, Col: 115}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var7 string
+			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(label)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 163, Col: 10}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-orange-700 dark:hover:bg-orange-500 dark:hover:text-white\" href=\"/\">Home</a>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-gray-500 hover:text-orange-600 dark:text-gray-300 dark:hover:text-orange-500 transition\" href=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var8 templ.SafeURL
+			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(path))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 168, Col: 29}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var9 string
+			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(label)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 170, Col: 10}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "</li><li>")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
+		return nil
+	})
+}
+
+// 2. Mobile Bottom Link Helper
+func bottomLink(path, label, active string, icon templ.Component) templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
 		}
-		if activeLink == "/fridge" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-orange-600 transition\" href=\"/fridge\">Frigo</a>")
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var10 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var10 == nil {
+			templ_7745c5c3_Var10 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		if active == path {
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "<a href=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var11 templ.SafeURL
+			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(path))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 179, Col: 29}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "\" class=\"inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group\"><div class=\"w-6 h-6 mb-1 text-orange-600 dark:text-orange-500\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = icon.Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "</div><span class=\"text-xs text-orange-600 dark:text-orange-500\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var12 string
+			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(label)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 185, Col: 69}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "</span></a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-orange-700 dark:hover:bg-orange-500 dark:hover:text-white\" href=\"/fridge\">Frigo</a>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "<a href=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var13 templ.SafeURL
+			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(path))
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 189, Col: 29}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "\" class=\"inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group\"><div class=\"w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-500\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = icon.Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "</div><span class=\"text-xs text-gray-500 dark:text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-500\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var14 string
+			templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(
+				label)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `service/templates/base.templ`, Line: 199, Col: 9}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</span></a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "</li><li>")
+		return nil
+	})
+}
+
+// --- Icons (SVGs) ---
+func homeIcon() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var15 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var15 == nil {
+			templ_7745c5c3_Var15 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "<svg class=\"w-6 h-6\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"currentColor\" viewBox=\"0 0 20 20\"><path d=\"m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z\"></path></svg>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if activeLink == "/guests" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-orange-600 transition\" href=\"/guests\">Guests</a>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "<a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-orange-700 dark:hover:bg-orange-500 dark:hover:text-white\" href=\"/guests\">Guests</a>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
+		return nil
+	})
+}
+
+func fridgeIcon() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 13, "</li></ul></nav><div class=\"flex items-center gap-4\"><div class=\"sm:flex sm:gap-4\"><a class=\"block rounded-md px-5 py-2.5 text-sm font-medium text-white transition hover:bg-orange-700 dark:hover:bg-orange-500\" href=\"#\">Get the Source</a></div><button class=\"block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden dark:bg-gray-800 dark:text-white dark:hover:text-white/75\"><span class=\"sr-only\">Toggle menu</span> <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"size-5\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-width=\"2\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M4 6h16M4 12h16M4 18h16\"></path></svg></button></div></div></div></header>")
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var16 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var16 == nil {
+			templ_7745c5c3_Var16 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "<svg class=\"w-6 h-6\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M10.5 19.5h3m-6.75 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-15a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 4.5v15a2.25 2.25 0 0 0 2.25 2.25Z\"></path></svg>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		return nil
+	})
+}
+
+func guestsIcon() templ.Component {
+	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
+		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
+			return templ_7745c5c3_CtxErr
+		}
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
+		if !templ_7745c5c3_IsBuffer {
+			defer func() {
+				templ_7745c5c3_BufErr := templruntime.ReleaseBuffer(templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err == nil {
+					templ_7745c5c3_Err = templ_7745c5c3_BufErr
+				}
+			}()
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var17 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var17 == nil {
+			templ_7745c5c3_Var17 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, "<svg class=\"w-6 h-6\" aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"currentColor\" viewBox=\"0 0 20 18\"><path d=\"M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z\"></path></svg>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -169,16 +449,16 @@ func Layout(contents templ.Component, title string, activeLink string) templ.Com
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var5 == nil {
-			templ_7745c5c3_Var5 = templ.NopComponent
+		templ_7745c5c3_Var18 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var18 == nil {
+			templ_7745c5c3_Var18 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
 		templ_7745c5c3_Err = header(title).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "<body class=\"flex flex-col h-full bg-slate-900\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "<body class=\"flex flex-col h-full bg-slate-900 pb-20 md:pb-0\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -186,7 +466,7 @@ func Layout(contents templ.Component, title string, activeLink string) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 15, "<main class=\"flex-1 container \">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 27, "<main class=\"flex-1 container mx-auto p-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -194,7 +474,7 @@ func Layout(contents templ.Component, title string, activeLink string) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 16, "</main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 28, "</main>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -202,7 +482,7 @@ func Layout(contents templ.Component, title string, activeLink string) templ.Com
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "<script src=\"https://unpkg.com/htmx.org@2.0.3\"></script><script src=\"https://unpkg.com/htmx.org/dist/ext/json-enc.js\"></script></body>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 29, "<script src=\"https://unpkg.com/htmx.org@2.0.3\"></script><script src=\"https://unpkg.com/htmx.org/dist/ext/json-enc.js\"></script></body>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

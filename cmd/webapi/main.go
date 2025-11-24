@@ -28,7 +28,6 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"math/rand"
 	"net/http"
 	"os"
 	"os/signal"
@@ -37,7 +36,7 @@ import (
 	"github.com/ardanlabs/conf"
 	"github.com/lorenzougolini/wimf-app/service/api"
 	"github.com/lorenzougolini/wimf-app/service/database"
-	"github.com/lorenzougolini/wimf-app/service/globaltime"
+	"github.com/lorenzougolini/wimf-app/service/foodapi"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/sirupsen/logrus"
 )
@@ -60,7 +59,6 @@ func main() {
 // * waits for any termination event: SIGTERM signal (UNIX), non-recoverable server error, etc.
 // * closes the principal web server
 func run() error {
-	rand.Seed(globaltime.Now().UnixNano())
 	// Load Configuration and defaults
 	cfg, err := loadConfiguration()
 	if err != nil {
@@ -110,10 +108,14 @@ func run() error {
 	// buffered channel so the goroutine can exit if we don't collect this error.
 	serverErrors := make(chan error, 1)
 
+	// Start Food API client
+	foodClient := foodapi.New()
+
 	// Create the API router
 	apirouter, err := api.New(api.Config{
 		Logger:   logger,
 		Database: db,
+		FoodApi:  *foodClient,
 	})
 	if err != nil {
 		logger.WithError(err).Error("error creating the API server instance")
@@ -121,11 +123,11 @@ func run() error {
 	}
 	router := apirouter.Handler()
 
-	router, err = registerWebUI(router)
-	if err != nil {
-		logger.WithError(err).Error("error registering web UI handler")
-		return fmt.Errorf("registering web UI handler: %w", err)
-	}
+	// router, err = registerWebUI(router)
+	// if err != nil {
+	// 	logger.WithError(err).Error("error registering web UI handler")
+	// 	return fmt.Errorf("registering web UI handler: %w", err)
+	// }
 
 	// Apply CORS policy
 	router = applyCORSHandler(router)
