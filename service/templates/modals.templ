@@ -1,0 +1,55 @@
+package templates
+
+import "github.com/lorenzougolini/wimf-app/service/models"
+
+templ ExpirationModal(item models.ProductInfo) {
+	<div id="modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+		<div
+			class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transform transition-all"
+		>
+			<div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
+				<h3 class="text-lg font-bold text-gray-900 dark:text-white">
+					Aggiungi Prodotto
+				</h3>
+			</div>
+			<form hx-post="/fridge/items" hx-target="#modal-backdrop" hx-swap="delete" class="px-6 py-4">
+				<input type="hidden" name="barcode" value={ item.Barcode }/>
+				<input type="hidden" name="name" value={ item.Name }/>
+				<input type="hidden" name="brand" value={ item.Brand }/>
+				<div class="mb-4">
+					<label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Prodotto rilevato</label>
+					<div class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+						{ item.Name } - { item.Brand }
+					</div>
+				</div>
+				<div class="mb-6">
+					<label for="expiration_date" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+						Data di scadenza
+					</label>
+					<input
+						type="date"
+						id="expiration_date"
+						name="expiration_date"
+						required
+						class="box-border bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+					/>
+				</div>
+				<div class="flex justify-end gap-3">
+					<button
+						type="button"
+						onclick="document.getElementById('modal-backdrop').remove()"
+						class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-600"
+					>
+						Annulla
+					</button>
+					<button
+						type="submit"
+						class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700"
+					>
+						Salva
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+}

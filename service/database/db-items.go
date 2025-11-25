@@ -19,14 +19,14 @@ func (db *appdbimpl) CheckIdExistence(barcode string) (bool, error) {
 	return exists, nil
 }
 
-func (db *appdbimpl) AddItem(product models.ProductInfo) error {
+func (db *appdbimpl) AddItem(product models.ProductInfo, expiration time.Time) error {
 	id, err := uuid.NewV7()
 	if err != nil {
 		return err
 	}
 	newId := id.String()
 	now := time.Now()
-	exp := now.AddDate(0, 0, 14)
+
 	query := `
 		INSERT INTO items (id, barcode, name, brand, quantity, expiration_date, added_at)
 	VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -38,7 +38,7 @@ func (db *appdbimpl) AddItem(product models.ProductInfo) error {
 		product.Name,
 		product.Brand,
 		1,
-		exp.Format(models.DbTimeLayout),
+		expiration.Format(models.DbTimeLayout),
 		now.Format(models.DbTimeLayout),
 	)
 	if err != nil {

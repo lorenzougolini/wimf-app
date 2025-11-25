@@ -29,8 +29,6 @@ templ Home() {
 		</div>
 	</section>
 	<script>
-  // --- 1. EAN-13 Checksum Validator ---
-  // 1D scanners sometimes "hallucinate" numbers. This math ensures the code is real.
   function validateEan13(code) {
     if (!code || code.length !== 13) return false;
 
@@ -43,7 +41,7 @@ templ Home() {
     return checkDigit === parseInt(code[12]);
   }
 
-  // --- 2. Scanner Logic ---
+  // Scanner Logic
   let lastScanned = null;
   let confidenceCounter = null;
   const CONFIDENCE_THRESHOLD = 5;
@@ -57,7 +55,7 @@ templ Home() {
         target: document.querySelector('#interactive'),
         constraints: {
           facingMode: "environment",
-          // Higher resolution is CRITICAL for EAN-13
+          // Higher resolution
           width: {min: 440, ideal: 1280, max: 1920},
           height: {min: 480, ideal: 720, max: 1080},
           aspectRatio: {min: 1, max: 2}
@@ -70,7 +68,7 @@ templ Home() {
       numOfWorkers: 2,
       frequency: 10,
       decoder: {
-        // Only look for EAN (Europe/International standard)
+        // Only look for EAN
         readers: ["ean_reader"]
       },
       locate: true
@@ -88,10 +86,9 @@ templ Home() {
       const code = result.codeResult.code;
       const status = document.getElementById('scan-status');
 
-      // A. Check if it is a valid EAN-13
       if (!validateEan13(code)) return;
 
-      // B. Debounce (Don't scan the same thing twice in 3 seconds)
+      // Don't scan the same thing twice in 3 seconds
       if (lastScanned === code) {
         status.innerText = `Scansionando...`;
         confidenceCounter++;
@@ -99,12 +96,6 @@ templ Home() {
         lastScanned = code;
         confidenceCounter = 1;
       }
-      // lastScanned = code;
-      // setTimeout(() => {lastScanned = null;}, 3000);
-      // if (confidenceCounter > 2) {
-      //   status.classList.remove('text-green-600');
-      //   status.classList.add('text-yellow-600');
-      // }
 
       if (confidenceCounter >= CONFIDENCE_THRESHOLD) {
         isPaused = true;
@@ -113,13 +104,10 @@ templ Home() {
         status.classList.remove('text-yellow-600');
         status.classList.add('text-green-600');
 
-        // D. Send to Go Backend
-        htmx.ajax('POST', `/fridge/items`, {
-          target: '#splash-right',
-          swap: 'none',
-          values: {
-            barcode: code
-          }
+        // Send to Backend
+        htmx.ajax('GET', `/fridge/items/form?barcode=${code}`, {
+          target: '#modals',
+          swap: 'innerHTML',
         });
 
         setTimeout(() => {

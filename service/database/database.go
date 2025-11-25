@@ -34,6 +34,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/lorenzougolini/wimf-app/service/models"
 )
@@ -41,7 +42,7 @@ import (
 // AppDatabase is the high level interface for the DB
 type AppDatabase interface {
 	CheckIdExistence(barcode string) (bool, error)
-	AddItem(productInfo models.ProductInfo) error
+	AddItem(productInfo models.ProductInfo, expiration time.Time) error
 	GetItemByBarcode(barcode string) (bool, models.Item, error)
 
 	GetNItemsBy(limit int, orderBy string) ([]models.Item, error)
