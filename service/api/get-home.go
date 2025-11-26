@@ -15,6 +15,4 @@ func (rt *_router) getHome(w http.ResponseWriter, r *http.Request, ps httprouter
 		// log.Printf("error rendering the home: %v", err)
 		http.Error(w, "Failed to render home page", http.StatusInternalServerError)
 	}
-	// w.Header().Set("content-type", "text/plain")
-	// _, _ = w.Write([]byte("Hello World!"))
 }
