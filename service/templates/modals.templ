@@ -1,27 +1,124 @@
 package templates
 
-import "github.com/lorenzougolini/wimf-app/service/models"
+import (
+	"github.com/lorenzougolini/wimf-app/service/models"
+	"time"
+)
 
-templ ExpirationModal(item models.ProductInfo) {
+// Updated signature: added isManual bool
+templ ExpirationModal(item models.ProductInfo, isManual bool, itemId string, expirationDate time.Time) {
 	<div id="modal-backdrop" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
 		<div
 			class="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transform transition-all"
 		>
 			<div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
 				<h3 class="text-lg font-bold text-gray-900 dark:text-white">
-					Aggiungi Prodotto
+					if itemId != "" {
+						Modifica Prodotto
+					} else if isManual {
+						Inserimento Manuale
+					} else {
+						Aggiungi Prodotto
+					}
 				</h3>
 			</div>
-			<form hx-post="/fridge/items" hx-target="#modal-backdrop" hx-swap="delete" class="px-6 py-4">
-				<input type="hidden" name="barcode" value={ item.Barcode }/>
-				<input type="hidden" name="name" value={ item.Name }/>
-				<input type="hidden" name="brand" value={ item.Brand }/>
-				<div class="mb-4">
-					<label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Prodotto rilevato</label>
-					<div class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
-						{ item.Name } - { item.Brand }
+			<form
+				if itemId !="" {
+					hx-put="/fridge/items"
+				} else {
+					hx-post="/fridge/items"
+				}
+				hx-target="#modal-backdrop"
+				hx-swap="delete"
+				class="px-6 py-4"
+			>
+				if itemId != "" {
+					<input type="hidden" name="id" value={ itemId }/>
+				}
+				if isManual {
+					<input type="hidden" name="isManual" value={ isManual }/>
+					<div class="space-y-4 mb-4">
+						<div>
+							<label for="barcode" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+								Barcode
+								(EAN)
+							</label>
+							<input
+								type="text"
+								name="barcode"
+								if itemId !="" {
+									value={ item.Barcode }
+									readonly
+								}
+								id="barcode"
+								required
+								placeholder="Es. 800123456"
+								class="box-border bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+							/>
+						</div>
+						<div>
+							<label for="name" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+								Nome
+								Prodotto
+							</label>
+							<input
+								type="text"
+								name="name"
+								if itemId !="" {
+									value={ item.Name }
+								}
+								id="name"
+								required
+								placeholder="Es. Latte Intero"
+								class="box-border bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+							/>
+						</div>
+						<div>
+							<label for="brand" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+								Marca
+							</label>
+							<input
+								type="text"
+								name="brand"
+								if itemId !="" {
+									value={ item.Brand }
+								}
+								id="brand"
+								placeholder="Es. Granarolo"
+								class="box-border bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+							/>
+						</div>
+						if itemId == "" {
+							<div>
+								<label for="addition_date" class="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+									Data di
+									Acquisto
+								</label>
+								<input
+									type="date"
+									name="addition_date"
+									if itemId !="" {
+										value={ item.Brand }
+									}
+									id="addition_date"
+									required
+									class="box-border bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+								/>
+							</div>
+						}
 					</div>
-				</div>
+				} else {
+					<input type="hidden" name="isManual" value={ isManual }/>
+					<input type="hidden" name="barcode" value={ item.Barcode }/>
+					<input type="hidden" name="name" value={ item.Name }/>
+					<input type="hidden" name="brand" value={ item.Brand }/>
+					<div class="mb-4">
+						<label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Prodotto rilevato</label>
+						<div class="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
+							{ item.Name } - { item.Brand }
+						</div>
+					</div>
+				}
 				<div class="mb-6">
 					<label for="expiration_date" class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
 						Data di scadenza
@@ -30,6 +127,9 @@ templ ExpirationModal(item models.ProductInfo) {
 						type="date"
 						id="expiration_date"
 						name="expiration_date"
+						if !expirationDate.IsZero() {
+							value={ expirationDate.Format("2006-01-02") }
+						}
 						required
 						class="box-border bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
 					/>

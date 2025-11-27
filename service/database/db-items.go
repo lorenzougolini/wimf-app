@@ -19,17 +19,16 @@ func (db *appdbimpl) CheckIdExistence(barcode string) (bool, error) {
 	return exists, nil
 }
 
-func (db *appdbimpl) AddItem(product models.ProductInfo, expiration time.Time) error {
+func (db *appdbimpl) AddItem(product models.ProductInfo, expiration time.Time, addition time.Time) error {
 	id, err := uuid.NewV7()
 	if err != nil {
 		return err
 	}
 	newId := id.String()
-	now := time.Now()
 
 	query := `
 		INSERT INTO items (id, barcode, name, brand, quantity, expiration_date, added_at)
-	VALUES (?, ?, ?, ?, ?, ?, ?)
+		VALUES (?, ?, ?, ?, ?, ?, ?);
 	`
 
 	_, err = db.c.Exec(query,
@@ -39,7 +38,7 @@ func (db *appdbimpl) AddItem(product models.ProductInfo, expiration time.Time) e
 		product.Brand,
 		1,
 		expiration.Format(models.DbTimeLayout),
-		now.Format(models.DbTimeLayout),
+		addition.Format(models.DbTimeLayout),
 	)
 	if err != nil {
 		return fmt.Errorf("error inserting item %s: %w", product.Barcode, err)
@@ -47,43 +46,50 @@ func (db *appdbimpl) AddItem(product models.ProductInfo, expiration time.Time) e
 	return nil
 }
 
-func (db *appdbimpl) GetItemByBarcode(barcode string) (bool, models.Item, error) {
-	var item models.Item
-	var expiration sql.NullString
-	var added string
+func (db *appdbimpl) GetItemsByBarcode(barcode string) (bool, []models.Item, error) {
+	var items []models.Item
 
-	err := db.c.QueryRow(`
-		SELECT barcode, name, brand, quantity, expiration_date, added_at
+	query := `
+		SELECT id, barcode, name, brand, quantity, expiration_date, added_at
 		FROM items
 		WHERE barcode=?
-		LIMIT 1;`,
-		barcode).Scan(
-		&item.Barcode,
-		&item.Name,
-		&item.Brand,
-		&item.Quantity,
-		&expiration,
-		&added,
-	)
+		ORDER BY expiration_date ASC;
+	`
+
+	rows, err := db.c.Query(query, barcode)
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return false, models.Item{}, nil
-		}
-		return false, models.Item{}, err
+		return false, nil, err
 	}
+	defer rows.Close()
 
-	parsedAdd, err := time.Parse(models.DbTimeLayout, added)
-	if err == nil {
-		item.AdditionDate = parsedAdd
-	}
-
-	if expiration.Valid {
-		parsedExp, err := time.Parse(models.DbTimeLayout, expiration.String)
-		if err == nil {
-			item.ExpirationDate = parsedExp
+	for rows.Next() {
+		var i models.Item
+		var exp, add sql.NullString
+		if err := rows.Scan(
+			&i.Id,
+			&i.Barcode,
+			&i.Name,
+			&i.Brand,
+			&i.Quantity,
+			&exp,
+			&add,
+		); err != nil {
+			return false, []models.Item{}, nil
 		}
+
+		if exp.Valid {
+			i.ExpirationDate, _ = time.Parse(models.DbTimeLayout, exp.String)
+		}
+		if add.Valid {
+			i.AdditionDate, _ = time.Parse(models.DbTimeLayout, add.String)
+		}
+
+		items = append(items, i)
 	}
-	return true, item, nil
+	if err = rows.Err(); err != nil {
+		return false, nil, err
+	}
+	return len(items) > 0, items, nil
 }
 
 func (db *appdbimpl) GetNItemsBy(limit int, orderBy string) ([]models.Item, error) {
@@ -151,11 +157,47 @@ func (db *appdbimpl) GetNItemsBy(limit int, orderBy string) ([]models.Item, erro
 	return result, nil
 }
 
+func (db *appdbimpl) GetItemById(id string) (models.Item, error) {
+	var item models.Item
+	var exp, add sql.NullString
+
+	query := `
+		SELECT id, barcode, name, brand, quantity, expiration_date, added_at
+		FROM items
+		WHERE id=?;
+	`
+
+	err := db.c.QueryRow(query, id).Scan(
+		&item.Id,
+		&item.Barcode,
+		&item.Name,
+		&item.Brand,
+		&item.Quantity,
+		&exp,
+		&add,
+	)
+	if err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return models.Item{}, fmt.Errorf("item with id %s not found", id)
+		}
+		return models.Item{}, err
+	}
+
+	if exp.Valid {
+		item.ExpirationDate, _ = time.Parse(models.DbTimeLayout, exp.String)
+	}
+	if add.Valid {
+		item.AdditionDate, _ = time.Parse(models.DbTimeLayout, add.String)
+	}
+
+	return item, nil
+}
+
 func (db *appdbimpl) IncreaseItemQuantity(barcode string, quantity int) error {
 	res, err := db.c.Exec(`
 		UPDATE items 
 		SET quantity = quantity + ? 
-		WHERE id = ?`,
+		WHERE id = ?;`,
 		quantity, barcode)
 	if err != nil {
 		return fmt.Errorf("error updating quantity: %w", err)
@@ -166,4 +208,15 @@ func (db *appdbimpl) IncreaseItemQuantity(barcode string, quantity int) error {
 	}
 
 	return nil
+}
+
+func (db *appdbimpl) DeleteItem(id string) error {
+	_, err := db.c.Exec("DELETE FROM items WHERE id=?;", id)
+	return err
+}
+
+func (db *appdbimpl) UpdateItem(id string, name string, brand string, date time.Time) error {
+	query := "UPDATE items SET name=?, brand=?, expiration_date=? WHERE id=?;"
+	_, err := db.c.Exec(query, name, brand, date.Format(models.DbTimeLayout), id)
+	return err
 }

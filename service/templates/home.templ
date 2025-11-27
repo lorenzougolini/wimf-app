@@ -11,9 +11,24 @@ templ Home() {
 				<video class="w-full h-full object-cover"></video>
 				<div class="absolute top-1/2 left-0 w-full h-1 bg-red-500 opacity-50 pointer-events-none"></div>
 			</div>
-			<div class="mt-4 w-full max-w-md">
-				<div id="scan-status" class="text-center text-lg font-bold text-gray-700 dark:text-gray-200 mb-2">
+			<div class="mt-4 w-full max-w-md flex flex-col items-center gap-2">
+				<div id="scan-status" class="text-center text-lg font-bold text-gray-700 dark:text-gray-200">
 					Scansiona un codice a barre!
+					<div class="text-xs font-normal text-gray-500">oppure</div>
+				</div>
+				<div>
+					<button
+						hx-get="/fridge/items/manual-form"
+						hx-target="#modals"
+						hx-swap="innerHTML"
+						class="flex items-center justify-center px-4 py-2 gap-1.5 bg-blue-600 text-white text-sm rounded-md shadow hover:bg-blue-700 transition-all focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-800"
+						aria-label="Aggiungi Manualmente"
+					>
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+						</svg>
+						<span class="font-medium">Inserisci Manualmente</span>
+					</button>
 				</div>
 				<div id="debug-log" class="text-xs text-red-500 font-mono bg-gray-100 p-2 rounded hidden"></div>
 			</div>

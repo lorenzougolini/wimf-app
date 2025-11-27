@@ -26,6 +26,8 @@ func (rt *_router) addItem(w http.ResponseWriter, r *http.Request, ps httprouter
 	name := strings.TrimSpace(r.FormValue("name"))
 	brand := strings.TrimSpace(r.FormValue("brand"))
 	expDate := strings.TrimSpace(r.FormValue("expiration_date"))
+	addDate := strings.TrimSpace(r.FormValue("addition_date"))
+	manual := strings.TrimSpace(r.FormValue("isManual"))
 	var message string
 
 	// check valid barcode and parse date
@@ -40,12 +42,17 @@ func (rt *_router) addItem(w http.ResponseWriter, r *http.Request, ps httprouter
 		expirationDate = time.Now().AddDate(0, 0, 14)
 	}
 
+	additionDate := time.Now()
+	if manual == "true" {
+		additionDate, _ = time.Parse("2006-01-02", addDate)
+	}
+
 	itemtToAdd := models.ProductInfo{
 		Barcode: barcode,
 		Name:    name,
 		Brand:   brand,
 	}
-	err = rt.db.AddItem(itemtToAdd, expirationDate)
+	err = rt.db.AddItem(itemtToAdd, expirationDate, additionDate)
 	if err != nil {
 		ctx.Logger.Errorf("Error while adding item: adding new item", err)
 		http.Error(w, "Error while adding item: adding new item", http.StatusInternalServerError)
@@ -77,13 +84,13 @@ func (rt *_router) getExpirationForm(w http.ResponseWriter, r *http.Request, _ h
 	}
 
 	// check if item already exists, if yes add, else create new
-	exists, localItem, err := rt.db.GetItemByBarcode(barcode)
+	exists, localItem, err := rt.db.GetItemsByBarcode(barcode)
 	var itemtToAdd models.ProductInfo
 	if exists {
 		itemtToAdd = models.ProductInfo{
 			Barcode: barcode,
-			Name:    localItem.Name,
-			Brand:   localItem.Brand,
+			Name:    localItem[0].Name,
+			Brand:   localItem[0].Brand,
 		}
 	} else {
 		apiInfo, err := rt.foodApi.GetProductByBarcode(barcode)
@@ -96,10 +103,20 @@ func (rt *_router) getExpirationForm(w http.ResponseWriter, r *http.Request, _ h
 	}
 
 	// render the expiration modal
-	err = templates.ExpirationModal(itemtToAdd).Render(r.Context(), w)
+	err = templates.ExpirationModal(itemtToAdd, false, "", time.Time{}).Render(r.Context(), w)
 	if err != nil {
 		ctx.Logger.Errorf("Error rendering modal: %v", err)
 		http.Error(w, "Error rendering modal", http.StatusInternalServerError)
+	}
+}
+
+func (rt *_router) getManualForm(w http.ResponseWriter, r *http.Request, _ httprouter.Params, ctx reqcontext.RequestContext) {
+	emptyProduct := models.ProductInfo{}
+
+	err := templates.ExpirationModal(emptyProduct, true, "", time.Time{}).Render(r.Context(), w)
+	if err != nil {
+		ctx.Logger.Errorf("Error rendering manual modal: %v", err)
+		http.Error(w, "Render error", http.StatusInternalServerError)
 	}
 }
 
@@ -126,4 +143,35 @@ func (rt *_router) getHomeItems(w http.ResponseWriter, r *http.Request, _ httpro
 	if err != nil {
 		http.Error(w, "HomeItems render error", http.StatusInternalServerError)
 	}
+}
+
+func (rt *_router) updateItem(w http.ResponseWriter, r *http.Request, _ httprouter.Params, ctx reqcontext.RequestContext) {
+	r.ParseForm()
+	id := r.FormValue("id")
+	name := r.FormValue("name")
+	brand := r.FormValue("brand")
+	dateStr := r.FormValue("expiration_date")
+	date, _ := time.Parse("2006-01-02", dateStr)
+
+	err := rt.db.UpdateItem(id, name, brand, date)
+	if err != nil {
+		http.Error(w, "Error while updating item", http.StatusInternalServerError)
+		message := fmt.Sprintf("Error: %s", err)
+		_ = json.NewEncoder(w).Encode(message)
+		return
+	}
+
+	w.Header().Set("HX-Trigger", `{"update-fridge": true}`)
+	w.WriteHeader(http.StatusOK)
+}
+
+func (rt *_router) deleteItem(w http.ResponseWriter, r *http.Request, _ httprouter.Params, ctx reqcontext.RequestContext) {
+	id := r.URL.Query().Get("id")
+	err := rt.db.DeleteItem(id)
+	if err != nil {
+		http.Error(w, "Error deleting item", http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("HX-Trigger", `{"update-fridge": true}`)
+	w.WriteHeader(http.StatusOK)
 }

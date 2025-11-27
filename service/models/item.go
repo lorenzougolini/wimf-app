@@ -1,8 +1,13 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/gofrs/uuid"
+)
 
 type Item struct {
+	Id             uuid.UUID
 	Barcode        string
 	Name           string
 	Brand          string

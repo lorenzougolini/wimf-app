@@ -1,74 +1,71 @@
 package templates
 
 import (
-"github.com/lorenzougolini/wimf-app/service/models"
-"strconv"
+	"github.com/lorenzougolini/wimf-app/service/models"
+	"strconv"
 )
 
 templ HomeItems(items models.HomeItems) {
-<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-  <section>
-    <div class="flex items-center justify-center mb-12 gap-4">
-      <h2 class="text-4xl font-bold text-gray-900 dark:text-white">
-        Ultimi prodotti aggiunti
-      </h2>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
-      for _, item := range items.RecentItems {
-      <div
-        class="flex items-center p-4 bg-white border border-gray-200 rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
-        <div
-          class="flex items-center justify-center w-8 h-8 shrink-0 text-l font-bold text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-gray-200">
-          { strconv.Itoa(item.Quantity) }x
-        </div>
-        <div class="flex-1 text-center overflow-hidden">
-          <h3 class="font-semibold text-gray-900 dark:text-white truncate">
-            { item.Name }
-          </h3>
-          <p class="text-sm text-gray-500 dark:text-gray-400 truncate">
-            { item.Brand }
-          </p>
-        </div>
-      </div>
-      }
-      if len(items.RecentItems) == 0 {
-      <p class="text-gray-500 text-sm italic col-span-full text-center">Nessun prodotto aggiunto di recente.</p>
-      }
-    </div>
-  </section>
-  <section>
-    <div class="flex items-center justify-center mb-12 mt-12 gap-4">
-      <h2 class="text-4xl font-bold text-gray-900 dark:text-white">
-        Prodotti in scadenza
-      </h2>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
-      for _, item := range items.ExpiringItems {
-      <div class={ getCardClass(item.ExpirationDate) }>
-        <div class="flex items-center justify-center flex-1 text-center min-w-0 px-2">
-          <div class="w-full">
-            <h3 class="font-semibold text-gray-900 dark:text-white truncate">
-              { item.Name }
-            </h3>
-            <p class="text-sm text-gray-500 dark:text-gray-400 truncate">
-              { item.Brand }
-            </p>
-          </div>
-        </div>
-        <div class={ getDateClass(item.ExpirationDate) }>
-          { item.ExpirationDate.Format("02/01/2006") }
-        </div>
-      </div>
-      }
-      if len(items.ExpiringItems) == 0 {
-      <p class="text-gray-500 text-sm italic col-span-full text-center">Nessun prodotto in scadenza.</p>
-      }
-    </div>
-  </section>
-</div>
-}					}
-				</ul>
-			}
-		</div>
+	<div class="space-y-12">
+		<section>
+			<div class="flex items-center justify-center mb-12 gap-4">
+				<h2 class="text-4xl font-bold text-gray-900 dark:text-white">
+					Ultimi prodotti aggiunti
+				</h2>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
+				for _, item := range items.RecentItems {
+					<div
+						class="flex items-center p-4 bg-white border border-gray-200 rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-md transition-shadow duration-200"
+					>
+						<div
+							class="flex items-center justify-center w-8 h-8 shrink-0 text-l font-bold text-blue-600 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-gray-200"
+						>
+							{ strconv.Itoa(item.Quantity) }x
+						</div>
+						<div class="flex-1 text-center overflow-hidden">
+							<h3 class="font-semibold text-gray-900 dark:text-white truncate">
+								{ item.Name }
+							</h3>
+							<p class="text-sm text-gray-500 dark:text-gray-400 truncate">
+								{ item.Brand }
+							</p>
+						</div>
+					</div>
+				}
+				if len(items.RecentItems) == 0 {
+					<p class="text-gray-500 text-sm italic col-span-full text-center">Nessun prodotto aggiunto di recente.</p>
+				}
+			</div>
+		</section>
+		<section>
+			<div class="flex items-center justify-center mb-12 mt-12 gap-4">
+				<h2 class="text-4xl font-bold text-gray-900 dark:text-white">
+					Prodotti in scadenza
+				</h2>
+			</div>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
+				for _, item := range items.ExpiringItems {
+					<div class={ getCardClass(item.ExpirationDate) }>
+						<div class="flex items-center justify-center flex-1 text-center min-w-0 px-2">
+							<div class="w-full">
+								<h3 class="font-semibold text-gray-900 dark:text-white truncate">
+									{ item.Name }
+								</h3>
+								<p class="text-sm text-gray-500 dark:text-gray-400 truncate">
+									{ item.Brand }
+								</p>
+							</div>
+						</div>
+						<div class={ getDateClass(item.ExpirationDate) }>
+							{ item.ExpirationDate.Format("02/01/2006") }
+						</div>
+					</div>
+				}
+				if len(items.ExpiringItems) == 0 {
+					<p class="text-gray-500 text-sm italic col-span-full text-center">Nessun prodotto in scadenza.</p>
+				}
+			</div>
+		</section>
 	</div>
 }

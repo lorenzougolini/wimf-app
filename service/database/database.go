@@ -42,10 +42,16 @@ import (
 // AppDatabase is the high level interface for the DB
 type AppDatabase interface {
 	CheckIdExistence(barcode string) (bool, error)
-	AddItem(productInfo models.ProductInfo, expiration time.Time) error
-	GetItemByBarcode(barcode string) (bool, models.Item, error)
-
+	AddItem(productInfo models.ProductInfo, expiration time.Time, addition time.Time) error
+	GetItemsByBarcode(barcode string) (bool, []models.Item, error)
+	GetItemById(id string) (models.Item, error)
 	GetNItemsBy(limit int, orderBy string) ([]models.Item, error)
+
+	GetFridge() ([]models.Item, error)
+
+	DeleteItem(id string) error
+	UpdateItem(id string, name string, brand string, date time.Time) error
+
 	IncreaseItemQuantity(barcode string, quantity int) error
 
 	Ping() error
