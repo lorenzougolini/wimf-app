@@ -10,9 +10,29 @@ MAIN_PKG=./cmd/$(APP_NAME)
 TAILWIND_INPUT=./static/css/custom.css
 TAILWIND_OUTPUT=./static/css/style.css
 
+# Download URL for Linux
+TAILWIND_URL=https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+
 .PHONY: help
 help: ## print make targets 
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+# --- Dependency Management (The Fix for Render) ---
+.PHONY: install-deps
+install-deps: ## Downloads templ and tailwind if missing
+	@echo "Checking dependencies..."
+	@# 1. Install Templ if not found in PATH
+	@if ! command -v templ > /dev/null; then \
+		echo "Templ not found. Installing..."; \
+		go install github.com/a-h/templ/cmd/templ@latest; \
+	fi
+	@# 2. Download Tailwind Binary if not found in root
+	@if [ ! -f ./tailwindcss ]; then \
+		echo "Tailwind binary not found. Downloading..."; \
+		curl -sLO $(TAILWIND_URL); \
+		chmod +x tailwindcss-linux-x64; \
+		mv tailwindcss-linux-x64 tailwindcss; \
+	fi
 
 # --- Tool Installation ---
 .PHONY: go-install-air
@@ -52,7 +72,7 @@ templ-watch: ## watch templ files and generate on change
 
 # --- Build & Run ---
 .PHONY: build
-build: tailwind-build templ-generate ## compile assets and build the main application
+build: install-deps tailwind-build templ-generate ## compile assets and build the main application
 	@echo "Building $(APP_NAME) binary..."
 	@mkdir -p $(BINARY_DIR)
 	go build -o $(BINARY_PATH) $(MAIN_PKG)
